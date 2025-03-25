@@ -1,9 +1,11 @@
-class ContaCorrente {
+import {Cliente} from "./cliente.js";
+export class ContaCorrente {
     #saldo;
-    
-    constructor(agencia, saldo) {
+
+    constructor(agencia, saldo, cliente) {
         this.agencia = agencia;
         this.#saldo = saldo;
+        this.cliente = cliente;
     }
     exibirSaldo() {
         console.log(`Seu saldo é de ${this.#saldo}`);
@@ -26,5 +28,9 @@ class ContaCorrente {
             return;
         }
         this.#saldo += valor;
+    }
+    transferir(valor, conta){
+        const valorSacado = this.sacar(valor);
+        conta.depositar(valorSacado);
     }
 }
