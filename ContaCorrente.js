@@ -1,12 +1,32 @@
 import {Cliente} from "./cliente.js";
 export class ContaCorrente {
-    #saldo;
+    #saldo = 0;
+    #cliente;
+    static numeroDeContas = 0;
+
+    set cliente(novoCliente){
+        if (novoCliente instanceof Cliente){
+            this.#cliente = novoCliente;
+        } else {
+            console.log("Erro: Cliente Invalido!");
+        }
+    }
+
+    get cliente() {
+        return this.#cliente;
+    }
+
+    get saldo(){
+        return this.#saldo;
+    }
 
     constructor(agencia, saldo, cliente) {
         this.agencia = agencia;
         this.#saldo = saldo;
-        this.cliente = cliente;
+        this.#cliente = cliente;
+        ContaCorrente.numeroDeContas += 1;
     }
+
     exibirSaldo() {
         console.log(`Seu saldo é de ${this.#saldo}`);
     }
